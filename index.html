@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rosoen Student Resources</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+body { margin: 0; }
+/* Layout: a study hub. A full-width practice band sits on top, then a grid of subject cards that
+   collapses to one column on phones. Subjects with two links hide them behind a button. */
+:root {
+  --bg: #F3F6F4;
+  --surface: #FFFFFF;
+  --ink: #17231F;
+  --muted: #55655F;
+  --line: #D5DED9;
+  --accent: #1E6B5B;
+  --accent-ink: #FFFFFF;
+  --soon-bg: #F4EBD5;
+  --soon-ink: #6B4E12;
+  --focus: #1E6B5B;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1714;
+    --surface: #17221E;
+    --ink: #E6EEEA;
+    --muted: #9DB0A8;
+    --line: #2B3B35;
+    --accent: #5CC7B0;
+    --accent-ink: #0F1714;
+    --soon-bg: #3A2F14;
+    --soon-ink: #F0D9A0;
+    --focus: #5CC7B0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1714;
+  --surface: #17221E;
+  --ink: #E6EEEA;
+  --muted: #9DB0A8;
+  --line: #2B3B35;
+  --accent: #5CC7B0;
+  --accent-ink: #0F1714;
+  --soon-bg: #3A2F14;
+  --soon-ink: #F0D9A0;
+  --focus: #5CC7B0;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.page {
+  padding-block: 20px 28px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.inner { max-width: 1080px; margin: 0 auto; }
+
+.display, h1, h2, h3, .brand {
+  font-family: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  text-wrap: balance;
+}
+
+/* Masthead */
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 800; font-size: 0.875rem; letter-spacing: -0.01em; }
+.brand span { font-weight: 600; color: var(--muted); margin-left: 6px; }
+
+/* Hero */
+.hero { padding: 24px 0 18px; max-width: 42rem; }
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.lede { margin: 10px 0 0; font-size: 0.8125rem; color: var(--muted); max-width: 36rem; }
+
+/* Cards */
+.featured { margin-bottom: 24px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+.card h2, .card h3 { margin: 0; font-size: 0.9375rem; font-weight: 700; line-height: 1.2; }
+.card p { margin: 0; color: var(--muted); }
+.card .btn { margin-top: auto; }
+
+.feature {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: transparent;
+  padding: 16px;
+  gap: 14px;
+}
+.feature h2 { font-size: 1.0625rem; }
+.feature p { color: inherit; opacity: 0.9; max-width: 36rem; }
+
+.soon { border-style: dashed; }
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--soon-bg);
+  color: var(--soon-ink);
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+
+/* Buttons and links */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-outline { background: transparent; color: var(--accent); }
+.btn:hover { filter: brightness(1.06); }
+.btn:focus-visible, .links a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.feature .btn { background: var(--accent-ink); color: var(--accent); border-color: var(--accent-ink); }
+.chev { display: inline-block; transition: transform 0.2s ease; }
+[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  gap: 8px;
+}
+.links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.links a:hover { border-color: var(--accent); color: var(--accent); }
+.links a span[aria-hidden] { color: var(--accent); }
+
+.eyebrow-section { margin: 0 0 14px; }
+
+/* Footer */
+.foot {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 0.6875rem;
+  color: var(--muted);
+  max-width: 48rem;
+}
+.foot p { margin: 0; }
+
+/* Phone: larger text and tap targets. Desktop stays compact. */
+@media (max-width: 520px) {
+  body { font-size: 0.9375rem; }
+  h1 { font-size: 1.6rem; }
+  .lede { font-size: 0.9375rem; }
+  .eyebrow, .tag { font-size: 0.75rem; }
+  .card h2, .card h3 { font-size: 1.125rem; }
+  .feature h2 { font-size: 1.3rem; }
+  .card { padding: 16px; }
+  .feature { padding: 18px; }
+  .btn, .links a { min-height: 44px; }
+  .btn { width: 100%; }
+  .foot { font-size: 0.8125rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="inner">
+    <header class="masthead">
+      <div class="brand">Rosoen <span>Student resources</span></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">GED prep</p>
+        <h1>Your study materials, in one place.</h1>
+        <p class="lede">Practice questions, lesson slides and session recordings. Pick a subject to begin.</p>
+      </section>
+
+      <section class="featured">
+        <article class="card feature">
+          <h2>Practice questions</h2>
+          <p>Quiz yourself by subject, review flashcards and see where to focus next.</p>
+          <a class="btn" href="https://rosoentech-cloud.github.io/Rosoen/" target="_blank" rel="noopener">Open practice questions <span aria-hidden="true">↗</span></a>
+        </article>
+      </section>
+
+      <h2 class="eyebrow eyebrow-section">Subjects</h2>
+      <div class="grid">
+
+        <article class="card">
+          <h3>Mathematics</h3>
+          <p>Lesson slides and math resources.</p>
+          <a class="btn" href="https://rosoentech-cloud.github.io/Math-/" target="_blank" rel="noopener">Open math resources <span aria-hidden="true">↗</span></a>
+        </article>
+
+        <article class="card soon">
+          <h3>Social science</h3>
+          <span class="tag">Coming soon</span>
+          <p>Materials for this subject will be posted here.</p>
+        </article>
+
+        <article class="card">
+          <h3>RLA</h3>
+          <p>Reasoning Through Language Arts: reading, argument, grammar and writing.</p>
+          <button class="btn btn-outline" type="button" aria-expanded="false" aria-controls="rla-links" data-toggle>
+            <span class="label">Choose a resource</span> <span class="chev" aria-hidden="true">▾</span>
+          </button>
+          <ul class="links" id="rla-links" hidden>
+            <li><a href="https://rosoentech-cloud.github.io/RLA/" target="_blank" rel="noopener"><span>Resources</span><span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://rosoentech-cloud.github.io/RLAB/" target="_blank" rel="noopener"><span>Recording</span><span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Science</h3>
+          <p>Study session slides and flashcards, plus the recorded review.</p>
+          <button class="btn btn-outline" type="button" aria-expanded="false" aria-controls="science-links" data-toggle>
+            <span class="label">Choose a resource</span> <span class="chev" aria-hidden="true">▾</span>
+          </button>
+          <ul class="links" id="science-links" hidden>
+            <li><a href="https://rosoentech-cloud.github.io/GED_Science_2_Session/" target="_blank" rel="noopener"><span>Resources</span><span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://rosoentech-cloud.github.io/Science-Record/" target="_blank" rel="noopener"><span>Recording</span><span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </article>
+
+      </div>
+    </main>
+
+    <footer class="foot">
+      <p>These are Rosoen practice materials, not official GED test questions. GED® is a registered trademark of the American Council on Education.</p>
+    </footer>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('[data-toggle]').forEach(function (btn) {
+  var panel = document.getElementById(btn.getAttribute('aria-controls'));
+  var label = btn.querySelector('.label');
+  btn.addEventListener('click', function () {
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    panel.hidden = open;
+    label.textContent = open ? 'Choose a resource' : 'Hide resources';
+  });
+});
+</script>
+
+</body>
+</html>
