@@ -262,7 +262,13 @@ h1 {
         <article class="card">
           <h3>Mathematics</h3>
           <p>Lesson slides and math resources.</p>
-          <a class="btn" href="https://rosoentech-cloud.github.io/Math-/" target="_blank" rel="noopener">Open math resources <span aria-hidden="true">↗</span></a>
+          <button class="btn btn-outline" type="button" aria-expanded="false" aria-controls="math-links" data-toggle>
+            <span class="label">Choose a resource</span> <span class="chev" aria-hidden="true">▾</span>
+          </button>
+          <ul class="links" id="math-links" hidden>
+            <li><a href="https://rosoentech-cloud.github.io/Math-/" target="_blank" rel="noopener"><span>Resources</span><span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://rosoentech-cloud.github.io/Math-Videos/" target="_blank" rel="noopener"><span>Recording</span><span aria-hidden="true">↗</span></a></li>
+          </ul>
         </article>
 
         <article class="card soon">
