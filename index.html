@@ -214,6 +214,18 @@ h1 {
 }
 .foot p { margin: 0; }
 
+/* Desktop: two columns of subjects, everything centred. */
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .masthead { justify-content: center; text-align: center; }
+  .hero { max-width: 48rem; margin-inline: auto; text-align: center; }
+  .lede { max-width: 40rem; margin-inline: auto; }
+  .feature { align-items: center; text-align: center; }
+  .feature p { margin-inline: auto; }
+  .eyebrow-section { text-align: center; }
+  .foot { margin-inline: auto; text-align: center; }
+}
+
 /* Phone: larger text and tap targets. Desktop stays compact. */
 @media (max-width: 520px) {
   body { font-size: 0.9375rem; }
